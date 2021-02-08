@@ -82,7 +82,7 @@ Promise.all([
 
         if (
             d.is_single == "FALSE" 
-            &&  !(d.type.includes("oblast")) 
+            // &&  !(d.type.includes("oblast")) 
             ) {
 
             try {
@@ -114,8 +114,8 @@ Promise.all([
         var line = new maptalks.ArcConnectorLine(src, dst, {
             arcDegree: 90,
             showOn: 'always',
-            // arrowStyle: 'classic',
-            // arrowPlacemet: 'vertex-last', //vertex-first, vertex-last, vertex-firstlast, point
+            arrowStyle: 'classic',
+            arrowPlacemet: 'vertex-last', //vertex-first, vertex-last, vertex-firstlast, point
             symbol: {
                 'fillColor': "#00000",
                 'fillOpacity': 1,
