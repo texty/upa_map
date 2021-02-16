@@ -1,4 +1,15 @@
 
+    var mySlider = new rSlider({
+        target: '#sampleSlider',
+        values: [2010, 2011, 2012],
+        range: false,
+        tooltip: true,
+        scale: true,
+        labels: true,
+        set: [2010, 2013]
+    });
+
+
 var map = new maptalks.Map('map', {
     center: [32, 48.5],
     zoom: 8,
@@ -154,9 +165,20 @@ Promise.all([
         function filter() {
             upa_places._geoList
               .forEach(function (feature) {
+                var value = d3.select("#input")._groups[0][0].value;
 
-                if (feature.properties.date > "1942-01-01 00:00:00") {
+                if (feature.properties.date > value) {
                 feature._symbol.markerFill = "#7375d8";
+                feature.updateSymbol([
+                  {
+                    // 'markerFill': '#7375d8',
+                    // 'markerWidth': 100,
+                    // 'markerHeight': 100
+                  }
+                ]);
+                }
+                else {
+                feature._symbol.markerFill = "#FF3100";
                 feature.updateSymbol([
                   {
                     // 'markerFill': '#7375d8',
