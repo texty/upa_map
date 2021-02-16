@@ -1,13 +1,29 @@
 
-    var mySlider = new rSlider({
-        target: '#sampleSlider',
-        values: [2010, 2011, 2012],
-        range: false,
-        tooltip: true,
-        scale: true,
-        labels: true,
-        set: [2010, 2013]
-    });
+var dict_of_vals = {"січ.1941":"1941-01-01 00:00",
+"лют.1941":"1941-02-01 00:00",
+"бер.1941":"1941-03-01 00:00",
+"квіт.1941":"1941-04-01 00:00",
+"трав.1941":"1941-05-01 00:00",
+"черв.1941":"1941-06-01 00:00",
+"лип.1941":"1941-07-01 00:00",
+"серп.1941":"1941-08-01 00:00",
+"вер.1941":"1941-09-01 00:00",
+"жовт.1941":"1941-10-01 00:00",
+"лист.1941":"1941-11-01 00:00",
+"груд.1941":"1941-12-01 00:00",
+"січ.1942":"1942-01-01 00:00",
+"лют.1942":"1942-02-01 00:00",
+"бер.1942":"1942-03-01 00:00",
+"квіт.1942":"1942-04-01 00:00",
+"трав.1942":"1942-05-01 00:00",
+"черв.1942":"1942-06-01 00:00",
+"лип.1942":"1942-07-01 00:00",
+"серп.1942":"1942-08-01 00:00",
+"вер.1942":"1942-09-01 00:00",
+"жовт.1942":"1942-10-01 00:00",
+"лист.1942":"1942-11-01 00:00",
+"груд.1942":"1942-12-01 00:00"};
+
 
 
 var map = new maptalks.Map('map', {
@@ -140,7 +156,10 @@ Promise.all([
                 'lineColor': "#00000",
                 'lineWidth': 0.5,
                 //'lineWidth': lineWidth,
-                'lineOpacity': 1
+                'lineOpacity': 0.1
+            },
+            properties : {
+                'date' : d.creation_date
             }
         });
 
@@ -152,44 +171,117 @@ Promise.all([
 
     });
 
+    function filter(date_val) {
+        upa_places._geoList
+          .forEach(function (feature) {
+            ;
 
-    d3.select("#filter").on("click", function() {
-        console.log("aaas")
-        function compare_strings(st, st_2){ 
-            console.log(st, st_2)
-            console.log("yes")
+            if (feature.properties.date >  date_val) {
+            // feature._symbol.markerFill = "#7375d8";
+            feature._symbol.markerFillOpacity = 0
+            feature.updateSymbol([
+              {
+                // 'markerFill': '#7375d8',
+                // 'markerWidth': 100,
+                // 'markerHeight': 100
+              }
+            ]);
+            }
+            else {
+            feature._symbol.markerFill = "#FF3100";
+            feature._symbol.markerFillOpacity = 0.8
+            feature.updateSymbol([
+              {
+                // 'markerFill': '#7375d8',
+                // 'markerWidth': 100,
+                // 'markerHeight': 100
+              }
+            ]);
+            }
+          });
+
+
+          linesLayer._geoList
+          .forEach(function (feature) {
+
+            if (feature.properties.date >  date_val) {
+            // feature._symbol.markerFill = "#7375d8";
+            feature._symbol.lineOpacity = 0
+            feature.updateSymbol([
+              {
+                // 'markerFill': '#7375d8',
+                // 'markerWidth': 100,
+                // 'markerHeight': 100
+              }
+            ]);
+            }
+            else {
+            feature._symbol.lineOpacity = 1
+            feature.updateSymbol([
+              {
+                // 'markerFill': '#7375d8',
+                // 'markerWidth': 100,
+                // 'markerHeight': 100
+              }
+            ]);
+            }
+          });
+      }
+
+
+    var mySlider = new rSlider({
+        target: '#sampleSlider',
+        values: ["лип.1941","серп.1941","вер.1941","жовт.1941","лист.1941", "груд.1941",
+        "січ.1942","лют.1942", "бер.1942","квіт.1942","трав.1942","черв.1942","лип.1942","серп.1942","вер.1942","жовт.1942","лист.1942", "груд.1942"],
+        range: false,
+        tooltip: true,
+        scale: true,
+        labels: false,
+        set: ["серп.1941"],
+        onChange: function (vals) {filter(dict_of_vals[vals])}
+    });
+
+
+
+    // d3.select("#filter").on("click", function() {
+    //     console.log("aaas")
+    //     function compare_strings(st, st_2){ 
+    //         console.log(st, st_2)
+    //         console.log("yes")
             
-            return True
-        }
+    //         return True
+    //     }
 
-        function filter() {
-            upa_places._geoList
-              .forEach(function (feature) {
-                var value = d3.select("#input")._groups[0][0].value;
+    //     function filter() {
+    //         upa_places._geoList
+    //           .forEach(function (feature) {
+    //             var value = d3.select("#input")._groups[0][0].value;
 
-                if (feature.properties.date > value) {
-                feature._symbol.markerFill = "#7375d8";
-                feature.updateSymbol([
-                  {
-                    // 'markerFill': '#7375d8',
-                    // 'markerWidth': 100,
-                    // 'markerHeight': 100
-                  }
-                ]);
-                }
-                else {
-                feature._symbol.markerFill = "#FF3100";
-                feature.updateSymbol([
-                  {
-                    // 'markerFill': '#7375d8',
-                    // 'markerWidth': 100,
-                    // 'markerHeight': 100
-                  }
-                ]);
-                }
-              });
-          }
-          filter()
-    })
+    //             if (feature.properties.date > value) {
+    //             // feature._symbol.markerFill = "#7375d8";
+    //             feature._symbol.markerFillOpacity = 0
+    //             feature.updateSymbol([
+    //               {
+    //                 // 'markerFill': '#7375d8',
+    //                 // 'markerWidth': 100,
+    //                 // 'markerHeight': 100
+    //               }
+    //             ]);
+    //             }
+    //             else {
+    //             feature._symbol.markerFill = "#FF3100";
+    //             feature._symbol.markerFillOpacity = 0.8
+    //             feature.updateSymbol([
+    //               {
+    //                 // 'markerFill': '#7375d8',
+    //                 // 'markerWidth': 100,
+    //                 // 'markerHeight': 100
+    //               }
+    //             ]);
+    //             }
+    //           });
+    //       }
+    //       filter()
+    // })
 
 });
