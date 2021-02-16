@@ -243,45 +243,23 @@ Promise.all([
 
 
 
-    // d3.select("#filter").on("click", function() {
-    //     console.log("aaas")
-    //     function compare_strings(st, st_2){ 
-    //         console.log(st, st_2)
-    //         console.log("yes")
-            
-    //         return True
-    //     }
+    d3.select("#filter").on("click", function(){
+        d3.select("div#myModal").style("display", "block");
 
-    //     function filter() {
-    //         upa_places._geoList
-    //           .forEach(function (feature) {
-    //             var value = d3.select("#input")._groups[0][0].value;
+        console.log("gdgdgd")
+        debugger;
 
-    //             if (feature.properties.date > value) {
-    //             // feature._symbol.markerFill = "#7375d8";
-    //             feature._symbol.markerFillOpacity = 0
-    //             feature.updateSymbol([
-    //               {
-    //                 // 'markerFill': '#7375d8',
-    //                 // 'markerWidth': 100,
-    //                 // 'markerHeight': 100
-    //               }
-    //             ]);
-    //             }
-    //             else {
-    //             feature._symbol.markerFill = "#FF3100";
-    //             feature._symbol.markerFillOpacity = 0.8
-    //             feature.updateSymbol([
-    //               {
-    //                 // 'markerFill': '#7375d8',
-    //                 // 'markerWidth': 100,
-    //                 // 'markerHeight': 100
-    //               }
-    //             ]);
-    //             }
-    //           });
-    //       }
-    //       filter()
-    // })
+        d3.html("staline.html").then(function (d) { 
+            console.log(d); 
+            console.log("gdgd")
+            d3.select("div#myModal").html(d.body.innerHTML)
+        }); 
+
+    });
+
+    d3.select(".close").on("click", function(){
+        d3.select("div#myModal").style("display", "none");
+    });
+
 
 });

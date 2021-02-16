@@ -54,16 +54,34 @@
         background-color: #E6EBE6;
     }
 
+
+    div#myModal {
+        position: absolute;
+        display: none;
+        background-color: white;
+    }
+
     
 </style>
 <body>
 
     <div id="map" class="container"></div>
 
+    <div id="myModal" class="modal">
+        <img class="modal-content" id="img01">
+        <span class="close">&times;</span>
+        <div id="next">
+        </div>
+    </div>
+
+
+
     <button id="filter">Filter
     </button>
+    <!-- <button id="filter">Filter
+    </button>
 
-        <input id="input">
+        <input id="input"> -->
     
     <!-- <input type="month" id="start" name="start"
        min="1941-01" value="1941-12"> -->
