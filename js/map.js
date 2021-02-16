@@ -102,12 +102,23 @@ Promise.all([
                 'markerHeight': 10
             },
             properties : {
-                'date' : d.creation_date
+                'date' : d.creation_date,
+                "place": d.place,
+                "parent_node": d.parent_node,
+                "type": "child"
+
+
             }
         }
 
 
         );
+
+        var tip = new maptalks.ui.ToolTip(d["place"]);
+        
+        tip.addTo(src);
+
+
 
         upa_places.addGeometry(src);
 
@@ -129,10 +140,18 @@ Promise.all([
                             'markerHeight': 10
                         },
                     properties : {
-                        'date' : d.creation_date
+                        'date' : d.creation_date,
+                        "place": d.place,
+                        "parent_node": d.parent_node,
+                        "type": "parent"
+
                     }
                     }
                 );
+
+                var tip = new maptalks.ui.ToolTip(d["parent_node"]);
+        
+                tip.addTo(dst);
               } catch (error) {
                 console.error(error);
                 console.log(d)
@@ -159,7 +178,7 @@ Promise.all([
                 'lineOpacity': 0.1
             },
             properties : {
-                'date' : d.creation_date
+                'date' : d.creation_date,
             }
         });
 
@@ -209,9 +228,6 @@ Promise.all([
             feature._symbol.lineOpacity = 0
             feature.updateSymbol([
               {
-                // 'markerFill': '#7375d8',
-                // 'markerWidth': 100,
-                // 'markerHeight': 100
               }
             ]);
             }
@@ -219,9 +235,6 @@ Promise.all([
             feature._symbol.lineOpacity = 1
             feature.updateSymbol([
               {
-                // 'markerFill': '#7375d8',
-                // 'markerWidth': 100,
-                // 'markerHeight': 100
               }
             ]);
             }
@@ -232,7 +245,8 @@ Promise.all([
     var mySlider = new rSlider({
         target: '#sampleSlider',
         values: ["лип.1941","серп.1941","вер.1941","жовт.1941","лист.1941", "груд.1941",
-        "січ.1942","лют.1942", "бер.1942","квіт.1942","трав.1942","черв.1942","лип.1942","серп.1942","вер.1942","жовт.1942","лист.1942", "груд.1942"],
+        "січ.1942","лют.1942", "бер.1942","квіт.1942","трав.1942","черв.1942","лип.1942",
+        "серп.1942","вер.1942","жовт.1942","лист.1942", "груд.1942"],
         range: false,
         tooltip: true,
         scale: true,
@@ -241,18 +255,61 @@ Promise.all([
         onChange: function (vals) {filter(dict_of_vals[vals])}
     });
 
+    // linesLayer.on('click', function (e) {
+    //     debugger;
+    //     alert(e)
+
+    //     });
+
+        map.on('click', function (e) {
+            //reset colors
+            // upa_places.forEach(function (g) {
+            //   g.updateSymbol({
+            //     'markerFill' : '#0e595e'
+            //   });
+            // });
+            //identify
+            map.identify(
+              {
+                'coordinate' : e.coordinate,
+                'layers' : [upa_places],
+                // "count": 1
+              },
+              function (geos) {
+                // debugger;
+                console.log(geos.map(d => d.properties.place)),
+                // console.log(geos[0].properties.parent_node)
+                console.log(geos.map(d => d._coordinates))
+                console.log(geos.map(d => d.properties.type))
+
+
+
+                geos.forEach(function (g) {
+                    g.updateSymbol({
+                      'markerFill' : '#f00'
+                    });
+                  });
+                // if (geos.length === 0) {
+                //   return;
+                // }
+                // geos.forEach(function (g) {
+                //   g.updateSymbol({
+                //     'markerFill' : '#f00'
+                //   });
+                // });
+              }
+            );
+          });
+
 
 
     d3.select("#filter").on("click", function(){
         d3.select("div#myModal").style("display", "block");
 
-        console.log("gdgdgd")
-        debugger;
 
-        d3.html("staline.html").then(function (d) { 
-            console.log(d); 
-            console.log("gdgd")
-            d3.select("div#myModal").html(d.body.innerHTML)
+
+        d3.html("htmls/staline.html").then(function (d) { 
+            d3.select("div#myModal div#modal-text").html(d.body.innerHTML)
         }); 
 
     });
