@@ -64,19 +64,33 @@
     }
 
     div#modal-text {
-        width: 60%;
+        width: 100%;
         margin: auto;
-        margin-top: 15vh;
-        height: 60vh;
+        /* margin-top: 15vh; */
+        height: 100%;
         overflow-y: auto;
-        padding: 30px;
-        background-color: rgb(255,255,255,0.8);
+        /* padding: 30px; */
+        
     }
 
-    span.close {
+    span#close {
         position: absolute;
-        top: 5%;
-        right: 5%;
+        top: 0;
+        right: 20px;
+        font-size: 40px;
+        color: gray;
+    }
+
+    div.modal-wrapper {
+        padding: 30px;
+        background-color: rgb(255,255,255,0.8);
+        width: 65%;
+        margin: auto;
+        margin-top: auto;
+        height: 60vh;
+        margin-top: 15vh;
+        position: relative;
+        
     }
 
     
@@ -85,13 +99,16 @@
 
     <div id="map" class="container"></div>
 
+
     <div id="myModal" class="modal">
-        <div id="modal-text">
-            <span class="close">&times;</span>
-        </div>
-        <img class="modal-content" id="img01">
-        
-        <div id="next">
+        <div class="modal-wrapper">
+            <div id="modal-text">
+                <!-- <span class="close">&times;</span> -->
+            </div>
+            <img class="modal-content" id="img01">
+            <span id="close">&times;</span>
+            <div id="next">
+            </div>
         </div>
     </div>
 

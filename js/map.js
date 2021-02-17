@@ -414,7 +414,8 @@ Promise.all([
 
   // });
 
-  d3.select(".close").on("click", function () {
+  d3.select("span#close").on("click", function () {
+    alert("fhydfh")
     d3.select("div#myModal").style("display", "none");
   });
 
