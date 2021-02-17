@@ -126,6 +126,38 @@
         background-color: gray;
     }
 
+    div.rs-tooltip {
+        padding: 5px;
+        background-color: transparent;
+        color: lightgray;
+        border: 0px;
+        font-size: 15px;
+        letter-spacing: 0.5px;
+    }
+
+
+    div.legend {
+        position: absolute;
+        top: 0;
+        right: 5%;
+        width: 200px;
+        color: white;
+        /* background-color: gray; */
+    
+    }
+
+    @media(max-width: 800px){
+        div.legend{
+            display: none;
+        }
+
+        div#sliderContainer{
+            width: 80%;
+        }
+
+        
+    }
+
     
 </style>
 <body>
@@ -143,6 +175,27 @@
             <div id="next">
             </div>
         </div>
+    </div>
+
+    <div class="legend">
+        <p>
+            Умовні позначення
+        </p>
+        <p>
+            <span style="display: inline-block; margin-right: 20px; height: 15px; width: 30px; border-bottom: 1px dashed white; margin-top: -7px;"></span>Лінія
+        </p> 
+        <p>
+            <span style="display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 20px; background-color: red;"></span>край
+        </p>  
+        <p>
+            <span></span>область
+        </p>  
+        <p>
+            <span></span>округ
+        </p>  
+        <p>
+            <span></span>район
+        </p>  
     </div>
 
 
