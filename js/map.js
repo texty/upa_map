@@ -41,7 +41,7 @@ var map = new maptalks.Map('map', {
     'content': '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/attributions">CARTO</a>'
   },
   baseLayer: new maptalks.TileLayer('tile', {
-    urlTemplate: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
+    urlTemplate: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',
     subdomains: ['a', 'b', 'c', 'd'],
     attribution: '&copy; <a href="http://osm.org">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/">CARTO</a>'
   }),
@@ -105,7 +105,7 @@ Promise.all([
         'markerFill': "#FF3A44",
         'markerFillOpacity': 0.8,
         'markerLineColor': "white",
-        'markerLineWidth': 0.8,
+        'markerLineWidth': 0,
         'markerWidth': 30,
         'markerHeight': 30
       },
@@ -146,7 +146,7 @@ Promise.all([
         'markerFill': "#FF3A44",
         'markerFillOpacity': 0.8,
         'markerLineColor': "white",
-        'markerLineWidth': 0.8,
+        'markerLineWidth': 0,
         'markerWidth': 10,
         'markerHeight': 10
       },
@@ -181,10 +181,10 @@ Promise.all([
           [d.parent_lon, d.parent_lat], {
           symbol: {
             'markerType': 'ellipse',
-            'markerFill': "#FF3100",
+            'markerFill': "#FF3A44",
             'markerFillOpacity': 0.8,
             'markerLineColor': "white",
-            'markerLineWidth': 0.8,
+            'markerLineWidth': 0,
             'markerWidth': 10,
             'markerHeight': 10
           },
@@ -221,7 +221,7 @@ Promise.all([
         symbol: {
           'fillColor': "#00000",
           'fillOpacity': 1,
-          'lineColor': "#00000",
+          'lineColor': "white",
           'lineWidth': 0.5,
           //'lineWidth': lineWidth,
           'lineOpacity': 0.1
@@ -415,7 +415,6 @@ Promise.all([
   // });
 
   d3.select("span#close").on("click", function () {
-    alert("fhydfh")
     d3.select("div#myModal").style("display", "none");
   });
 

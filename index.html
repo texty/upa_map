@@ -30,10 +30,11 @@
         width: 100%;
         font-family: 'Open Sans', sans-serif;
         line-height: 1.6;
+        background-color: black;
       }
 
     .container {
-        width: 100%;
+        width: 95%;
         height: 90%;
         margin: auto;
         @media(max-width: 991px){
@@ -42,12 +43,17 @@
     }
 
     div#sliderContainer {
-        width: calc(98% - 380px);
-        max-width: calc(1420px - 280px);
+        width: 95%;
+        margin: 30px auto 0 auto;
+
+    }
+
+    div#target-years {
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        width: 95%;
         margin: auto;
-
-        /* width: 500px */
-
     }
 
     .maptalks-canvas-layer {
@@ -73,16 +79,21 @@
         
     }
 
+    div#modal-text img {
+            max-width: 80%;
+    }
+
     span#close {
         position: absolute;
         top: 0;
         right: 20px;
         font-size: 40px;
         color: gray;
+        cursor: pointer;
     }
 
     div.modal-wrapper {
-        padding: 30px;
+        padding: 50px 30px 30px 30px;
         background-color: rgb(255,255,255,0.8);
         width: 65%;
         margin: auto;
@@ -91,6 +102,28 @@
         margin-top: 15vh;
         position: relative;
         
+    }
+
+    .rs-container .rs-selected {
+        background-color: rgb(211,211,211,0.8);
+        border: 0px solid lightgray;
+    }
+
+    .rs-container .rs-pointer {
+        background-color: red;
+        width: 25px;
+        border-radius: 50%;
+        height: 25px;
+        top: 0;
+    }
+    
+    .rs-container .rs-bg { 
+        border: 0px solid gray;
+        border-right: 1px solid gray;
+    }
+
+    .rs-container .rs-scale span::before {
+        background-color: gray;
     }
 
     
@@ -126,6 +159,13 @@
 
     <div id=sliderContainer>
     <input type="range " id="sampleSlider" />
+    </div>
+
+    <div id="target-years">
+        <p>1941</p>
+        <!-- <p>січ.1941</p>
+        <p>лип.1942</p> -->
+        <p>1943</p>
     </div>
 
 
