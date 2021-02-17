@@ -92,6 +92,15 @@ Promise.all([
   // тут ми додаємо окремі маркери для великих міст, щоб можна буде по кліку на них показувати довідку
   let main_places = data[1].filter(d => (d.type.split(", ")[0] == 'oblast' | d.type.split(", ")[0] == 'kray'))
 
+
+  var type_size = {
+    // "oblast":40,
+    // "kray":40,
+    "okruga":25,
+    "nadraion":10,
+    "raion":10
+  }
+
   main_places.forEach(function (d) {
     d.child_lat = +d.child_lat;
     d.child_lon = +d.child_lon;
@@ -102,12 +111,12 @@ Promise.all([
       [d.child_lon, d.child_lat], {
       symbol: {
         'markerType': 'ellipse',
-        'markerFill': "#FF3A44",
-        'markerFillOpacity': 0.8,
-        'markerLineColor': "white",
-        'markerLineWidth': 0,
-        'markerWidth': 30,
-        'markerHeight': 30
+        'markerFill': "#ff3d4f",
+        'markerFillOpacity': 1,
+        'markerLineColor': "#b4b4b4",
+        'markerLineWidth': 4,
+        'markerWidth': 40,
+        'markerHeight': 40
       },
       properties: {
         'date': d.creation_date,
@@ -135,6 +144,9 @@ Promise.all([
     d.child_lon = +d.child_lon;
     d.parent_lat = +d.parent_lat;
     d.parent_lon = +d.parent_lon;
+
+    d.type_major =  d.type.split(", ")[0]
+
   });
 
 
@@ -143,12 +155,12 @@ Promise.all([
       [d.child_lon, d.child_lat], {
       symbol: {
         'markerType': 'ellipse',
-        'markerFill': "#FF3A44",
-        'markerFillOpacity': 0.8,
-        'markerLineColor': "white",
+        'markerFill': "#ff3d4f",
+        'markerFillOpacity': 1,
+        'markerLineColor': "#b4b4b4",
         'markerLineWidth': 0,
-        'markerWidth': 10,
-        'markerHeight': 10
+        'markerWidth': type_size[d.type_major],
+        'markerHeight': type_size[d.type_major]
       },
       properties: {
         'date': d.creation_date,
@@ -181,12 +193,12 @@ Promise.all([
           [d.parent_lon, d.parent_lat], {
           symbol: {
             'markerType': 'ellipse',
-            'markerFill': "#FF3A44",
-            'markerFillOpacity': 0.8,
-            'markerLineColor': "white",
+            'markerFill': "#ff3d4f",
+            'markerFillOpacity': 1,
+            'markerLineColor': "#b4b4b4",
             'markerLineWidth': 0,
-            'markerWidth': 10,
-            'markerHeight': 10
+            'markerWidth': type_size[d.type_major],
+            'markerHeight': type_size[d.type_major]
           },
           properties: {
             'date': d.creation_date,
@@ -212,19 +224,21 @@ Promise.all([
 
       upa_places.addGeometry(dst);
 
-
       var line = new maptalks.ArcConnectorLine(src, dst, {
         arcDegree: 90,
         showOn: 'always',
         // arrowStyle: 'classic',
         // arrowPlacemet: 'vertex-last', //vertex-first, vertex-last, vertex-firstlast, point
         symbol: {
-          'fillColor': "#00000",
-          'fillOpacity': 1,
-          'lineColor': "white",
+          // 'fillColor': "#blue",
+          // 'fillOpacity': type_opacity[d.type_major],
+          'lineColor': "#b4b4b4", 
           'lineWidth': 0.5,
+          // 'lineColor': type_color[d.type_major],
+          // 'lineWidth': type_width[d.type_major],
           //'lineWidth': lineWidth,
-          'lineOpacity': 0.1
+          // 'lineOpacity': 1
+          // type_opacity[d.type_major]
         },
         properties: {
           'date': d.creation_date,
@@ -247,6 +261,7 @@ Promise.all([
         if (feature.properties.date > date_val) {
           // feature._symbol.markerFill = "#7375d8";
           feature._symbol.markerFillOpacity = 0
+
           feature.updateSymbol([
             {
               // 'markerFill': '#7375d8',
@@ -256,8 +271,8 @@ Promise.all([
           ]);
         }
         else {
-          feature._symbol.markerFill = "#FF3100";
-          feature._symbol.markerFillOpacity = 0.8
+          feature._symbol.markerFill = "#ff3d4f";
+          feature._symbol.markerFillOpacity = 1
           feature.updateSymbol([
             {
               // 'markerFill': '#7375d8',
@@ -276,6 +291,7 @@ Promise.all([
         if (feature.properties.date > date_val) {
           // feature._symbol.markerFill = "#7375d8";
           feature._symbol.markerFillOpacity = 0
+          feature._symbol.markerLineWidth = 0
           feature.updateSymbol([
             {
               // 'markerFill': '#7375d8',
@@ -285,8 +301,9 @@ Promise.all([
           ]);
         }
         else {
-          feature._symbol.markerFill = "#FF3100";
-          feature._symbol.markerFillOpacity = 0.8
+          feature._symbol.markerFill = "#ff3d4f";
+          feature._symbol.markerFillOpacity = 1
+          feature._symbol.markerLineWidth = 4
           feature.updateSymbol([
             {
               // 'markerFill': '#7375d8',
