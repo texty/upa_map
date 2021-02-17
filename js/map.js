@@ -372,7 +372,7 @@ Promise.all([
           if (html_name) {
             d3.select("div#myModal").style("display", "block");
 
-            d3.html(`htmls/${html_name}`).then(function (d) {
+            d3.html(`https://raw.githubusercontent.com/texty/upa_map/main/htmls/${html_name}`).then(function (d) {
               d3.select("div#myModal div#modal-text").html(d.body.innerHTML)
             });
 

@@ -58,7 +58,25 @@
     div#myModal {
         position: absolute;
         display: none;
-        background-color: white;
+        
+        top: 0;
+        left: 0;
+    }
+
+    div#modal-text {
+        width: 60%;
+        margin: auto;
+        margin-top: 15vh;
+        height: 60vh;
+        overflow-y: auto;
+        padding: 30px;
+        background-color: rgb(255,255,255,0.8);
+    }
+
+    span.close {
+        position: absolute;
+        top: 5%;
+        right: 5%;
     }
 
     
@@ -68,9 +86,11 @@
     <div id="map" class="container"></div>
 
     <div id="myModal" class="modal">
-        <div id="modal-text"></div>
+        <div id="modal-text">
+            <span class="close">&times;</span>
+        </div>
         <img class="modal-content" id="img01">
-        <span class="close">&times;</span>
+        
         <div id="next">
         </div>
     </div>
