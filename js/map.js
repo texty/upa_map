@@ -72,6 +72,7 @@ Promise.all([
     // new maptalks.VectorLayer('admin', data[0]).addTo(map);
 
     const upa_places = new maptalks.VectorLayer('upa').addTo(map);
+    const obl_markers = new maptalks.VectorLayer('upa_main').addTo(map);
     var label_point = new maptalks.VectorLayer('label').addTo(map);
     
 
@@ -80,6 +81,42 @@ Promise.all([
     }).addTo(map);
 
     console.log(data[1]);
+
+    let main_places = data[1].filter(d => (d.type.split(", ")[0] == 'oblast' | d.type.split(", ")[0] == 'kray')  )
+
+    main_places.forEach(function (d) {
+        d.child_lat = +d.child_lat;
+        d.child_lon = +d.child_lon;
+        d.parent_lat = +d.parent_lat;
+        d.parent_lon = +d.parent_lon;
+
+        var main_markers = new maptalks.Marker(
+          [d.child_lon, d.child_lat], {
+          symbol: {
+              'markerType': 'ellipse',
+              'markerFill': "#FF3A44",
+              'markerFillOpacity': 0.8,
+              'markerLineColor': "white",
+              'markerLineWidth': 0.8,
+              'markerWidth': 30,
+              'markerHeight': 30
+          },
+          properties : {
+              'date' : d.creation_date,
+              "place": d.place,
+              "parent_node": d.parent_node,
+              "type": "child"
+
+
+          }
+      }
+
+
+      );
+
+      obl_markers.addGeometry(main_markers);
+
+    });
 
     data[1].forEach(function (d) {
                 d.child_lat = +d.child_lat;
@@ -220,6 +257,36 @@ Promise.all([
           });
 
 
+          obl_markers._geoList
+          .forEach(function (feature) {
+            ;
+
+            if (feature.properties.date >  date_val) {
+            // feature._symbol.markerFill = "#7375d8";
+            feature._symbol.markerFillOpacity = 0
+            feature.updateSymbol([
+              {
+                // 'markerFill': '#7375d8',
+                // 'markerWidth': 100,
+                // 'markerHeight': 100
+              }
+            ]);
+            }
+            else {
+            feature._symbol.markerFill = "#FF3100";
+            feature._symbol.markerFillOpacity = 0.8
+            feature.updateSymbol([
+              {
+                // 'markerFill': '#7375d8',
+                // 'markerWidth': 100,
+                // 'markerHeight': 100
+              }
+            ]);
+            }
+          });
+
+
+
           linesLayer._geoList
           .forEach(function (feature) {
 
@@ -272,22 +339,31 @@ Promise.all([
             map.identify(
               {
                 'coordinate' : e.coordinate,
-                'layers' : [upa_places],
+                'layers' : [obl_markers],
                 // "count": 1
               },
               function (geos) {
                 // debugger;
-                console.log(geos.map(d => d.properties.place)),
-                // console.log(geos[0].properties.parent_node)
-                console.log(geos.map(d => d._coordinates))
-                console.log(geos.map(d => d.properties.type))
+                // console.log(geos.map(d => d.properties.place)),
+                // // console.log(geos[0].properties.parent_node)
+                // console.log(geos.map(d => d._coordinates))
+                // console.log(geos.map(d => d.properties.type))
 
 
 
                 geos.forEach(function (g) {
-                    g.updateSymbol({
-                      'markerFill' : '#f00'
-                    });
+                    if (g.properties.type == "child") {
+                        console.log(g.properties.place)
+
+                        d3.select("div#myModal").style("display", "block");
+
+                        d3.html("htmls/staline.html").then(function (d) { 
+                            d3.select("div#myModal div#modal-text").html(d.body.innerHTML)
+                        }); 
+                    }
+                    // g.updateSymbol({
+                    //   'markerFill' : '#f00'
+                    // });
                   });
                 // if (geos.length === 0) {
                 //   return;
@@ -303,16 +379,14 @@ Promise.all([
 
 
 
-    d3.select("#filter").on("click", function(){
-        d3.select("div#myModal").style("display", "block");
+    // d3.select("#filter").on("click", function(){
+    //     d3.select("div#myModal").style("display", "block");
 
+    //     d3.html("htmls/staline.html").then(function (d) { 
+    //         d3.select("div#myModal div#modal-text").html(d.body.innerHTML)
+    //     }); 
 
-
-        d3.html("htmls/staline.html").then(function (d) { 
-            d3.select("div#myModal div#modal-text").html(d.body.innerHTML)
-        }); 
-
-    });
+    // });
 
     d3.select(".close").on("click", function(){
         d3.select("div#myModal").style("display", "none");
