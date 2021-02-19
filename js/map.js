@@ -29,8 +29,20 @@ var dict_of_vals = {
 
 var names_of_obl = {
   "Сталіно": "staline.html",
-  "Житомир": "zhytomyr.html"
-
+  "Житомир": "zhytomyr.html",
+  "Харків": "kharkiv.html",
+  "Суми": "sumy.html",
+  "Запоріжжя": "zhaporizhia.html",
+  "Полтава": "poltava.html",
+  "Одеса": "odesa.html",
+  "Миколаїв": "mykolaiv.html",
+  "Сімферополь": "krym.html",
+  "Кіровоград": "kirovohrad.html",
+  "Київ": "kyiv.html",
+  "Кам'янець-Подільський": "kdp.html",
+  "Дніпропетровськ": "dnipro.html",
+  "Ворошиловград": "luhansk.html",
+  "Вінниця": "vinnytsia.html"
 };
 
 
@@ -381,6 +393,7 @@ Promise.all([
 
 
         geos.forEach(function (g) {
+          debugger;
 
           var html_name = names_of_obl[g.properties.place];
           // debugger;
@@ -389,7 +402,8 @@ Promise.all([
           if (html_name) {
             d3.select("div#myModal").style("display", "block");
 
-            d3.html(`https://raw.githubusercontent.com/texty/upa_map/main/htmls/${html_name}`).then(function (d) {
+            // https://raw.githubusercontent.com/texty/upa_map/main/
+            d3.html(`htmls/${html_name}`).then(function (d) {
               d3.select("div#myModal div#modal-text").html(d.body.innerHTML)
             });
 
