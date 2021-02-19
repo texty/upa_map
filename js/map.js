@@ -48,7 +48,8 @@ var names_of_obl = {
 
 var map = new maptalks.Map('map', {
   center: [32, 48.5],
-  zoom: 8,
+  zoom: 7,
+  
   attributionControl: {
     'content': '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/attributions">CARTO</a>'
   },
@@ -65,16 +66,17 @@ var map = new maptalks.Map('map', {
   layers: [
     new maptalks.VectorLayer('v')
   ],
-  minZoom: 5,
+  minZoom: 7,
   maxZoom: 10,
   maxPitch: 0,
   pitch: 0,
-  scrollWheelZoom: true
+  scrollWheelZoom: false
 });
 
 
 Promise.all([
   d3.json("data/UKR_adm1.json"), //0
+  // d3.csv("data/geocode_upa_with_dest.csv"), 
   d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vTk93XrFEPta5M6gEMbnVKuzw4n31pYctHqMyfk9KkW0PS5TGWVjShbYpA9LUZRwuGfoYi1wuFYIwmm/pub?output=csv"), //1
 
   // d3.csv("data/top_senders_coal.csv"),
@@ -403,7 +405,7 @@ Promise.all([
             d3.select("div#myModal").style("display", "block");
 
             // https://raw.githubusercontent.com/texty/upa_map/main/
-            d3.html(`htmls/${html_name}`).then(function (d) {
+            d3.html(`https://raw.githubusercontent.com/texty/upa_map/main/htmls/${html_name}`).then(function (d) {
               d3.select("div#myModal div#modal-text").html(d.body.innerHTML)
             });
 
