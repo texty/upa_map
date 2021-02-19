@@ -39,7 +39,7 @@ var names_of_obl = {
   "Сімферополь": "krym.html",
   "Кіровоград": "kirovohrad.html",
   "Київ": "kyiv.html",
-  "Кам'янець-Подільський": "kdp.html",
+  "Проскурів": "kdp.html",
   "Дніпропетровськ": "dnipro.html",
   "Ворошиловград": "luhansk.html",
   "Вінниця": "vinnytsia.html"
