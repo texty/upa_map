@@ -43,7 +43,9 @@ var names_of_obl = {
   "Дніпропетровськ": "dnipro.html",
   "Ворошиловград": "luhansk.html",
   "Вінниця": "vinnytsia.html",
-  "Львівський": "lviv.html"
+  "Львівський": "lviv.html",
+  "Рівненська": "rivne.html"
+
 };
 
 
