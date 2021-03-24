@@ -78,7 +78,7 @@ var map = new maptalks.Map('map', {
 Promise.all([
   d3.json("data/UKR_adm1.json"), //0
   // d3.csv("data/geocode_upa_with_dest.csv"), 
-  d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vTk93XrFEPta5M6gEMbnVKuzw4n31pYctHqMyfk9KkW0PS5TGWVjShbYpA9LUZRwuGfoYi1wuFYIwmm/pub?output=csv"), //1
+  d3.csv("data/geocode_upa_with_dest.csv"), //1
 
   // d3.csv("data/top_senders_coal.csv"),
   // d3.csv("data/top_senders_grain.csv"),
@@ -109,8 +109,6 @@ Promise.all([
 
 
   var type_size = {
-    // "oblast":40,
-    // "kray":40,
     "okruga":25,
     "nadraion":10,
     "raion":10
