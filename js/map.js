@@ -44,8 +44,8 @@ var names_of_obl = {
   "Ворошиловград": "luhansk.html",
   "Вінниця": "vinnytsia.html",
   "Львівський": "lviv.html",
-  "Рівненська": "rivne.html"
-
+  "Рівненська": "rivne.html",
+  "Поліська": "polissia.html",
 };
 
 
