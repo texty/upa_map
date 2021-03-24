@@ -42,7 +42,8 @@ var names_of_obl = {
   "Проскурів": "kdp.html",
   "Дніпропетровськ": "dnipro.html",
   "Ворошиловград": "luhansk.html",
-  "Вінниця": "vinnytsia.html"
+  "Вінниця": "vinnytsia.html",
+  "Львівський": "lviv.html"
 };
 
 
