@@ -46,6 +46,15 @@ var names_of_obl = {
   "Львівський": "lviv.html",
   "Рівненська": "rivne.html",
   "Поліська": "polissia.html",
+  'Холмська ("Король Данило")': "holm.html",
+  "Чернігів": "chernihiv.html",
+  "Буковинська": "bukovyna.html",
+  "Волинська": "volyn.html",
+  "Станіславський": "stanislav.html",
+  "Закарпатська": "zakarpatia.html",
+  "Дрогобицька (Стрийська)":"drohobych.html",
+  'Перемишльська ("Олімп")': "peremyshl.html",
+  "Тернопільська" :"ternopil.html"
 };
 
 
@@ -398,7 +407,7 @@ Promise.all([
         geos.forEach(function (g) {
           debugger;
 
-          var html_name = names_of_obl[g.properties.place];
+          var html_name = names_of_obl[g.properties.place.trim()];
           // debugger;
 
 
